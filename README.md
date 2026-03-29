@@ -40,5 +40,46 @@ The infrastructure is provisioned on AWS using a single-node Docker host approac
 Each service in the `/user`, `/products`, `/orders`, `/cart`, and `/frontend` directories contains a `Dockerfile`.
 ```bash
 # Example Build & Push (Repeat for all 5 services)
+
+
+2. Infrastructure Provisioning (Terraform)
+Initialize the Terraform directory:
+
+Bash
+terraform init
+Review the execution plan:
+
+Bash
+terraform plan
+Apply the configuration to provision AWS resources:
+
+Bash
+terraform apply -auto-approve
+3. Post-Deployment Verification
+Once Terraform completes, it will output the Public IP of the EC2 instance.
+
+Frontend URL: http://<EC2_PUBLIC_IP>
+
+Health Check: Ensure all containers are running by SSHing into the instance and running docker ps.
+
+🛠️ Terraform Logic
+The main.tf file utilizes a User Data script to automate the "Day 0" operations:
+
+System Update: Updates APT packages.
+
+Docker Installation: Installs and starts the Docker engine.
+
+Automated Pull: Fetches the latest images from DockerHub.
+
+Container Orchestration: Starts all 5 services with the correct port mappings and restart policies.
+
+📝 Evaluation Criteria Met
+[x] VPC & Security Group: Configured for public web traffic and private inter-service communication.
+
+[x] EC2 Provisioning: Automated via Terraform.
+
+[x] Docker Deployment: Used user-data for zero-touch service startup.
+
+[x] Public Accessibility: Frontend mapped to standard HTTP port 80.
 docker build -t <your-dockerhub-username>/ecommerce-frontend ./frontend
 docker push <your-dockerhub-username>/ecommerce-frontend
