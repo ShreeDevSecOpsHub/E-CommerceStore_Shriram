@@ -48,15 +48,15 @@ docker push <your-dockerhub-username>/ecommerce-frontend
 ### 2. Infrastructure Provisioning (Terraform)
 Initialize the Terraform directory:
 
-Bash
+#Bash
 terraform init
 Review the execution plan:
 
-Bash
+#Bash
 terraform plan
 Apply the configuration to provision AWS resources:
 
-Bash
+#Bash
 terraform apply -auto-approve
 3. Post-Deployment Verification
 Once Terraform completes, it will output the Public IP of the EC2 instance.
@@ -65,7 +65,7 @@ Frontend URL: http://<EC2_PUBLIC_IP>
 
 Health Check: Ensure all containers are running by SSHing into the instance and running docker ps.
 
-🛠️ Terraform Logic
+###🛠️ Terraform Logic
 The main.tf file utilizes a User Data script to automate the "Day 0" operations:
 
 System Update: Updates APT packages.
@@ -76,7 +76,7 @@ Automated Pull: Fetches the latest images from DockerHub.
 
 Container Orchestration: Starts all 5 services with the correct port mappings and restart policies.
 
-📝 Evaluation Criteria Met
+###📝 Evaluation Criteria Met
 [x] VPC & Security Group: Configured for public web traffic and private inter-service communication.
 
 [x] EC2 Provisioning: Automated via Terraform.
