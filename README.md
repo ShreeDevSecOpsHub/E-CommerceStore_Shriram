@@ -40,9 +40,12 @@ The infrastructure is provisioned on AWS using a single-node Docker host approac
 Each service in the `/user`, `/products`, `/orders`, `/cart`, and `/frontend` directories contains a `Dockerfile`.
 ```bash
 # Example Build & Push (Repeat for all 5 services)
+docker build -t <your-dockerhub-username>/ecommerce-frontend ./frontend
+docker push <your-dockerhub-username>/ecommerce-frontend
+```
 
 
-2. Infrastructure Provisioning (Terraform)
+### 2. Infrastructure Provisioning (Terraform)
 Initialize the Terraform directory:
 
 Bash
